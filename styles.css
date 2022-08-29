@@ -46,6 +46,8 @@ table {
 .wrapper{
     font-family: 'Montserrat', sans-serif;
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 100px repeat(4,1fr);
     grid-template-areas: 
     "nav header header "
     "nav content content "
@@ -56,15 +58,16 @@ table {
 
 .header{
     grid-area: header;
-    height: 100px;
-    
+    background-color: #EEEEEE;
     display: grid;
     align-items: center;
     justify-content: center;
+    
 }
 
 h1{
     font-size: 1.6rem;
+    padding-top: 15px;
 }
 
 .nav{
@@ -110,7 +113,29 @@ input[type=submit]{
 
 .content{
     background-color: #EEEEEE;
-    width: 100vh;
-    height: 100vh;
+    display: grid;
     grid-area: content;
+
+}
+
+.gamegrid{
+    height: 65%;
+    width: 65%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+    gap: 5px;
+    align-self: center;
+    justify-self: center;
+}
+
+.cell{
+    background-color: #222831;
+    border-radius: 3px;
+}
+
+.cell:hover{
+    background-color: #495057;
+    border-radius: 7px;
+    
 }
