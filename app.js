@@ -1,10 +1,15 @@
 
 
-const playerFactory = (name, type) =>{
-    return {name ,type}
+const playerFactory = (name) =>{
+    return {name }
 }
 
 const gameboard = (() =>{
+
+    let playerA = [];
+    let playerB = [];
+    let playerAArray = [];
+    let playerBArray = [];
 
     const playerOneNameArea = document.getElementById('pOneName');
     const playerTwoNameArea = document.getElementById('pTwoName');
@@ -20,8 +25,12 @@ const gameboard = (() =>{
         })
     }
 
-    const players = [];
-
+    const playerInfo = () => {
+        startGame.addEventListener('click', () =>{
+            playerA.push(playerOneNameArea.value)
+            playerB.push(playerTwoNameArea.value)
+        }) 
+    }
 
     const winningSequences = 
     [
@@ -37,11 +46,12 @@ const gameboard = (() =>{
 
 
     return {
-        winningSequences , clearFocus
+        winningSequences , clearFocus , playerA, playerInfo
     }
 
 
 })();
 
-console.log(gameboard.winningSequences)
 gameboard.clearFocus()
+console.log(gameboard.playerA)
+gameboard.playerInfo()

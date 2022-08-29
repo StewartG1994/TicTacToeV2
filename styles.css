@@ -101,7 +101,7 @@ input[type=text]:focus{
     outline: none;
 }
 
-input[type=submit]{
+input[type=button]{
 
     width: 80%;
     justify-self: center;
