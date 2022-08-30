@@ -4,11 +4,15 @@ const playerFactory = (name) =>{
 
 const gameboard = (() =>{
 
-    let playerA = [];
-    let playerB = [];
+    let playerA = '';
+    let playerB = '';
     let playerAArray = [];
     let playerBArray = [];
+    let counter  = 0;
+    let playerOneTurn = true;
+    let playerTwoTurn = false;
    
+    const displayArea = document.querySelector('.display');
     const playerOneNameArea = document.getElementById('pOneName');
     const playerTwoNameArea = document.getElementById('pTwoName');
     const startGame = document.getElementById('start');
@@ -25,15 +29,19 @@ const gameboard = (() =>{
 
     const playerInfo = () => {
         startGame.addEventListener('click', () =>{
-            playerA.push(playerOneNameArea.value)
-            playerB.push(playerTwoNameArea.value)
+            playerA = (playerOneNameArea.value)
+            playerB = (playerTwoNameArea.value)
+            displayArea.textContent = playerA + 'take your turn'            
+
         }) 
     }
+
+
 
     const cellData = () => {
         let cell = document.querySelectorAll('.cell')
         cell.forEach(cell =>{cell.addEventListener('click', () =>{
-            console.log(cell)
+            console.log(cell.getAttribute('data-value'))
         })
 })}
 
@@ -49,15 +57,18 @@ const gameboard = (() =>{
         [2,4,6]
     ]
 
+    const playGame = () => {
+    }
+
 
     return {
-        winningSequences , clearFocus , playerA, playerInfo , cellData
+        winningSequences , clearFocus , playerA, playerInfo , cellData , playGame
     }
 
 
 })();
 
-gameboard.clearFocus()
-console.log(gameboard.playerA)
 gameboard.playerInfo()
+gameboard.clearFocus()
+gameboard.playGame()
 gameboard.cellData()
