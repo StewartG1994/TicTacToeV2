@@ -1,5 +1,3 @@
-
-
 const playerFactory = (name) =>{
     return {name }
 }
@@ -10,7 +8,7 @@ const gameboard = (() =>{
     let playerB = [];
     let playerAArray = [];
     let playerBArray = [];
-
+   
     const playerOneNameArea = document.getElementById('pOneName');
     const playerTwoNameArea = document.getElementById('pTwoName');
     const startGame = document.getElementById('start');
@@ -32,6 +30,13 @@ const gameboard = (() =>{
         }) 
     }
 
+    const cellData = () => {
+        let cell = document.querySelectorAll('.cell')
+        cell.forEach(cell =>{cell.addEventListener('click', () =>{
+            console.log(cell)
+        })
+})}
+
     const winningSequences = 
     [
         [0,1,2],
@@ -46,7 +51,7 @@ const gameboard = (() =>{
 
 
     return {
-        winningSequences , clearFocus , playerA, playerInfo
+        winningSequences , clearFocus , playerA, playerInfo , cellData
     }
 
 
@@ -55,3 +60,4 @@ const gameboard = (() =>{
 gameboard.clearFocus()
 console.log(gameboard.playerA)
 gameboard.playerInfo()
+gameboard.cellData()
