@@ -69,9 +69,33 @@ const gameboard = (() =>{
         })
     }
 
+    const playGame = () => {
+        let cell = document.querySelectorAll('.cell');
+        cell.forEach(cell =>{
+
+            if (playerOneTurn == true)
+            {
+                playerOneTurn = false;
+                cell.addEventListener('click', () =>{
+                cell.textContent = 'X';
+                
+                console.log(playerOneTurn)
+              
+            })}
+
+            else if (playerOneTurn == false){
+                playerOneTurn = true;
+                cell.addEventListener('click', () =>{
+                    cell.textContent = 'O';
+                })
+            }
+        })
+        
+
+    }
 
     return {
-        winningSequences , clearFocus , playerA, playerInfo , cellData , winCheckPlayerA ,winCheckPlayerB
+      clearFocus , playerInfo , cellData , winCheckPlayerA ,winCheckPlayerB , playGame
 
     }
 
@@ -83,3 +107,4 @@ gameboard.clearFocus()
 gameboard.winCheckPlayerA()
 gameboard.winCheckPlayerB()
 gameboard.cellData()
+gameboard.playGame()
