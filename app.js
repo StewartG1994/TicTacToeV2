@@ -6,8 +6,8 @@ const gameboard = (() =>{
 
     let playerA = '';
     let playerB = '';
-    let playerAArray = [];
-    let playerBArray = [];
+    let playerAArray = [3,4,5];
+    let playerBArray = [0,1,2];
     let counter  = 0;
     let playerOneTurn = true;
     let playerTwoTurn = false;
@@ -36,8 +36,6 @@ const gameboard = (() =>{
         }) 
     }
 
-
-
     const cellData = () => {
         let cell = document.querySelectorAll('.cell')
         cell.forEach(cell =>{cell.addEventListener('click', () =>{
@@ -57,12 +55,24 @@ const gameboard = (() =>{
         [2,4,6]
     ]
 
-    const playGame = () => {
+    const winCheckPlayerA = () => {
+
+        winningSequences.forEach(item =>{
+        if (item.every(elem => playerAArray.includes(elem))){console.log('testw')}
+        })
+    }
+
+    const winCheckPlayerB = () => {
+
+        winningSequences.forEach(item =>{
+        if (item.every(elem => playerBArray.includes(elem))){console.log('testC')}
+        })
     }
 
 
     return {
-        winningSequences , clearFocus , playerA, playerInfo , cellData , playGame
+        winningSequences , clearFocus , playerA, playerInfo , cellData , winCheckPlayerA ,winCheckPlayerB
+
     }
 
 
@@ -70,5 +80,6 @@ const gameboard = (() =>{
 
 gameboard.playerInfo()
 gameboard.clearFocus()
-gameboard.playGame()
+gameboard.winCheckPlayerA()
+gameboard.winCheckPlayerB()
 gameboard.cellData()
