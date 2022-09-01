@@ -4,13 +4,16 @@ const playerFactory = (name) =>{
 
 const gameboard = (() =>{
 
+    let playerOneWin = false;
+    let playerTwowin = false;
     let playerA = '';
     let playerB = '';
-    let playerAArray = [3,4,5];
-    let playerBArray = [0,1,2];
+    let playerAArray = [];
+    let playerBArray = [];
     let counter  = 0;
     let playerOneTurn = true;
     let playerTwoTurn = false;
+  
    
     const displayArea = document.querySelector('.display');
     const playerOneNameArea = document.getElementById('pOneName');
@@ -31,17 +34,10 @@ const gameboard = (() =>{
         startGame.addEventListener('click', () =>{
             playerA = (playerOneNameArea.value)
             playerB = (playerTwoNameArea.value)
-            displayArea.textContent = playerA + 'take your turn'            
+            displayArea.textContent = playerA + ' you go first!'            
 
         }) 
     }
-
-    const cellData = () => {
-        let cell = document.querySelectorAll('.cell')
-        cell.forEach(cell =>{cell.addEventListener('click', () =>{
-            console.log(cell.getAttribute('data-value'))
-        })
-})}
 
     const winningSequences = 
     [
@@ -58,44 +54,75 @@ const gameboard = (() =>{
     const winCheckPlayerA = () => {
 
         winningSequences.forEach(item =>{
-        if (item.every(elem => playerAArray.includes(elem))){console.log('testw')}
+        if (item.every(elem => playerAArray.includes(elem)))
+        
+        {displayArea.textContent = playerA + ' Wins'
+        playerOneWin === true
+    }
         })
     }
 
     const winCheckPlayerB = () => {
 
         winningSequences.forEach(item =>{
-        if (item.every(elem => playerBArray.includes(elem))){console.log('testC')}
+        if (item.every(elem => playerBArray.includes(elem))){ 
+          {displayArea.textContent = playerB + ' Wins'
+        playerTwoWin === true
+    }
+    }
         })
     }
 
+    const startCheck = () =>{
+        if (playerA === '' || playerB ===''){displayArea.textContent ='Please enter names and press Start to begin'
+        
+        }
+    }
+
+
+    const drawCheck = () => {
+        if (counter === 9) {displayArea.textContent = 'Its a draw'}
+    }
     const playGame = () => {
+        startCheck()
+        startGame.addEventListener('click', ()=>{})
         let cell = document.querySelectorAll('.cell');
         cell.forEach(cell =>{
 
-            if (playerOneTurn == true)
-            {
-                playerOneTurn = false;
-                cell.addEventListener('click', () =>{
-                cell.textContent = 'X';
-                
-                console.log(playerOneTurn)
-              
-            })}
+            cell.addEventListener('click', () =>{
 
-            else if (playerOneTurn == false){
-                playerOneTurn = true;
-                cell.addEventListener('click', () =>{
+                if(cell.textContent === 'X' || cell.textContent === 'O')
+                 {return}
+
+                else if (playerOneTurn === true)
+                {
+                    
+                    playerOneTurn = false;
+                    playerTwoTurn = true
+                    displayArea.textContent = playerB + 'take your turn'
+                    cell.textContent = 'X';
+                    playerAArray.push(Number(cell.getAttribute('data-value')))
+                    counter++
+                    drawCheck()
+                    winCheckPlayerA()
+                }
+    
+                else {
+                    playerOneTurn = true;
+                    playerTwoTurn = false
+                    displayArea.textContent = playerA + ' take your turn'
                     cell.textContent = 'O';
-                })
-            }
-        })
-        
-
+                    playerBArray.push(Number(cell.getAttribute('data-value')))
+                    counter++
+                    drawCheck()
+                    winCheckPlayerB()
+                }
+            })
+            })
     }
 
     return {
-      clearFocus , playerInfo , cellData , winCheckPlayerA ,winCheckPlayerB , playGame
+      clearFocus , playerInfo , winCheckPlayerA ,winCheckPlayerB , playGame
 
     }
 
@@ -104,7 +131,4 @@ const gameboard = (() =>{
 
 gameboard.playerInfo()
 gameboard.clearFocus()
-gameboard.winCheckPlayerA()
-gameboard.winCheckPlayerB()
-gameboard.cellData()
 gameboard.playGame()
